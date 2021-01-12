@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
+import './App.css';
 
 class TableCell extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { Color: props.color };
 	}
 	render() {
-		return <td style={{ backgroundColor: this.state.color }}></td>;
+		return <td ></td>;
 	}
 }
-
 export default TableCell;
