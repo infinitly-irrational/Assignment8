@@ -12,6 +12,7 @@ class Table extends React.Component {
 
 		this.handleAddButtonClick = this.handleAddButtonClick.bind(this);
 		this.handleDeleteButtonClick = this.handleDeleteButtonClick.bind(this);
+		this.updateColorOfCell = this.updateColorOfCell.bind(this);
 	}
 	componentDidMount() {
 		console.log('mounting');
@@ -56,6 +57,12 @@ class Table extends React.Component {
 		let newMatrix = this.populateTable(y, x);
 		this.setState({ tableMatrix: newMatrix });
 	}
+
+	updateColorOfCell(x = 0, y = 0, color = this.defaultColor) {
+		let matrix = this.state.tableMatrix;
+		matrix[y][x] = color;
+		this.setState({ tableMatrix: matrix });
+	}
 	render() {
 		return (
 			<div>
@@ -64,7 +71,14 @@ class Table extends React.Component {
 				<table className="table">
 					<tbody>
 						{this.state.tableMatrix.map((row, yIndex) => {
-							return <TableRow key={yIndex} row={row} />;
+							return (
+								<TableRow
+									key={yIndex}
+									index={yIndex}
+									row={row}
+									updateColorOfCell={this.updateColorOfCell}
+								/>
+							);
 						})}
 					</tbody>
 				</table>
@@ -74,3 +88,4 @@ class Table extends React.Component {
 }
 
 export default Table;
+export { defaultColor };
