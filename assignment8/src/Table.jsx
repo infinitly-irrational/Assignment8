@@ -61,6 +61,7 @@ class Table extends React.Component{
                 <button onClick={this.handleDeleteButtonClick}>Delete Row</button>
                 <button onClick={this.addColumnButton}>Add Column</button>
                 <button onClick={this.deleteColumnButton}>Delete Column</button>
+                <br></br>
                 <table className="table">
                     <tbody>
                     {this.state.rows.map((r, index) => (
