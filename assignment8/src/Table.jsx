@@ -7,22 +7,41 @@ class Table extends React.Component{
         this.state={
             rows: ['row']
         }
-        this.handleButtonClick = this.handleButtonClick.bind(this)
+        this.handleAddButtonClick = this.handleAddButtonClick.bind(this)
+        this.handleDeleteButtonClick = this.handleDeleteButtonClick.bind(this)
     }
-    handleButtonClick(){
+
+
+    handleAddButtonClick(){
         var rows = this.state.rows
         rows.push('new row')
         this.setState({rows: rows})
+        
+        console.log(rows)
+        console.log('add button clicked')
 
     }
+
+    handleDeleteButtonClick(){
+        var rows = this.state.rows
+        rows.pop()
+        this.setState({rows: rows})
+        console.log('delete button clicked')
+        console.log(rows)
+        console.log('delete button clicked')
+    }
+
     render(){
         return(
             <div>
-                <button onClick={this.handleButtonClick}>Add Row</button>
+                <button onClick={this.handleAddButtonClick}>Add Row</button>
+                <button onClick={this.handleDeleteButtonClick}>Delete Row</button>
                 <table className="table">
-                    {this.state.rows.map((r) => (
-                      <TableRow></TableRow>
+                    <tbody>
+                    {this.state.rows.map((r, index) => (
+                      <TableRow key={index}></TableRow>
                     ))}
+                    </tbody>
                     
                 </table>
             </div>
