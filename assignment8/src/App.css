@@ -37,11 +37,9 @@
   }
 }
 
-.tableRows{
-  border: 2px solid black;
-  height: 50px;
-}
-.table{
-  width: 50%;
-  border: 2px solid black;
+table, th, td{
+  border: 5px solid black;
+  border-width: thin;
+  height: 100px;
+  width: 600px;
 }
