@@ -9,3 +9,5 @@ class TableCell extends Component {
 		return <td style={{ backgroundColor: this.state.color }}></td>;
 	}
 }
+
+export default TableCell;
