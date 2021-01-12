@@ -7,11 +7,11 @@ const defaultColor = 'rgb(255, 255, 255)';
 class Table extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { defaultColor: props.color != undefined ? props.color : defaultColor, tableMatrix: [] };
+		this.state = { defaultColor: props.color !== undefined ? props.color : defaultColor, tableMatrix: [] };
 		this.populateTable = this.populateTable.bind(this);
 
-		this.handleAddButtonClick = this.handleAddButtonClick.bind(this)
-		this.handleDeleteButtonClick = this.handleDeleteButtonClick.bind(this)
+		this.handleAddButtonClick = this.handleAddButtonClick.bind(this);
+		this.handleDeleteButtonClick = this.handleDeleteButtonClick.bind(this);
 	}
 	componentDidMount() {
 		console.log('mounting');
@@ -26,33 +26,39 @@ class Table extends React.Component {
 				? this.state.tableMatrix
 				: new Array(height).fill(new Array(width).fill(this.state.defaultColor));
 
-		for (let y = matrix.length; y < height; y++) {
+		for (let y = 0; y < height; y++) {
 			if (matrix[y] === undefined) matrix[y] = new Array(width).fill(this.state.defaultColor);
-			else if (matrix[y].length < width) matrix[y].fill(this.state.defaultColor, matrix[y].length, width);
+			else {
+				console.log(matrix[y].length);
+				while (matrix[y].length < width) {
+					matrix[y].push(this.state.defaultColor);
+				}
+				while (matrix[y].length > width) {
+					matrix[y].pop();
+				}
+			}
+		}
+		while (matrix.length > height) {
+			matrix.pop();
 		}
 		return matrix;
 	}
-	handleAddButtonClick(){
-			var rows = this.state.rows
-			rows.push('new row')
-			this.setState({rows: rows})
-
-			console.log(rows)
-			console.log('add button clicked')
-
+	handleAddButtonClick() {
+		let y = this.state.tableMatrix.length + 1;
+		let x = this.state.tableMatrix[0].length;
+		let newMatrix = this.populateTable(y, x);
+		this.setState({ tableMatrix: newMatrix });
 	}
 
-	handleDeleteButtonClick(){
-			var rows = this.state.rows
-			rows.pop()
-			this.setState({rows: rows})
-			console.log('delete button clicked')
-			console.log(rows)
-			console.log('delete button clicked')
+	handleDeleteButtonClick() {
+		let y = this.state.tableMatrix.length - 1;
+		let x = this.state.tableMatrix[0].length;
+		let newMatrix = this.populateTable(y, x);
+		this.setState({ tableMatrix: newMatrix });
 	}
 	render() {
 		return (
-		<div>
+			<div>
 				<button onClick={this.handleAddButtonClick}>Add Row</button>
 				<button onClick={this.handleDeleteButtonClick}>Delete Row</button>
 				<table className="table">
