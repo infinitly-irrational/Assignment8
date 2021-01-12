@@ -9,6 +9,9 @@ class Table extends React.Component {
 		super(props);
 		this.state = { defaultColor: props.color != undefined ? props.color : defaultColor, tableMatrix: [] };
 		this.populateTable = this.populateTable.bind(this);
+
+		this.handleAddButtonClick = this.handleAddButtonClick.bind(this)
+		this.handleDeleteButtonClick = this.handleDeleteButtonClick.bind(this)
 	}
 	componentDidMount() {
 		console.log('mounting');
@@ -29,10 +32,30 @@ class Table extends React.Component {
 		}
 		return matrix;
 	}
+	handleAddButtonClick(){
+			var rows = this.state.rows
+			rows.push('new row')
+			this.setState({rows: rows})
+
+			console.log(rows)
+			console.log('add button clicked')
+
+	}
+
+	handleDeleteButtonClick(){
+			var rows = this.state.rows
+			rows.pop()
+			this.setState({rows: rows})
+			console.log('delete button clicked')
+			console.log(rows)
+			console.log('delete button clicked')
+	}
 	render() {
 		return (
-			<div>
-				<table>
+		<div>
+				<button onClick={this.handleAddButtonClick}>Add Row</button>
+				<button onClick={this.handleDeleteButtonClick}>Delete Row</button>
+				<table className="table">
 					<tbody>
 						{this.state.tableMatrix.map((row, yIndex) => {
 							return <TableRow key={yIndex} row={row} />;
