@@ -7,7 +7,7 @@ class TableRow extends React.Component{
     }
     render(){
         return(
-                <tr>
+                <tr className="tableRows">
                     <TableCell></TableCell>
                 </tr>
         )
