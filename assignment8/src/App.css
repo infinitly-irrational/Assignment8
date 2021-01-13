@@ -43,6 +43,7 @@ table, th, td{
   height: 50px;
   width: 600px;
   border-spacing: 2px;
+  float: center;
 }
 
 button {
@@ -56,7 +57,6 @@ button {
   display: inline-block;
   font-size: 16px;
   cursor: pointer;
-  float: left;
 }
 
 button:hover {
