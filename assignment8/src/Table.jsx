@@ -13,10 +13,14 @@ class Table extends React.Component {
 			tableMatrix: [],
 		};
 		this.populateTable = this.populateTable.bind(this);
-
 		this.handleAddButtonClick = this.handleAddButtonClick.bind(this);
 		this.handleDeleteButtonClick = this.handleDeleteButtonClick.bind(this);
 		this.updateColorOfCell = this.updateColorOfCell.bind(this);
+		this.addColumnButton = this.addColumnButton.bind(this);
+		this.deleteColumnButton = this.deleteColumnButton.bind(this);
+		this.fillAll = this.fillAll.bind(this);
+		this.clear = this.clear.bind(this)
+		this.fillAllUncolored = this.fillAllUncolored.bind(this)
 	}
 	componentDidMount() {
 		console.log('mounting');
@@ -53,6 +57,7 @@ class Table extends React.Component {
 		let x = this.state.tableMatrix[0].length;
 		let newMatrix = this.populateTable(y, x);
 		this.setState({ tableMatrix: newMatrix });
+		console.log(this.state.tableMatrix)
 	}
 
 	handleDeleteButtonClick() {
@@ -60,20 +65,76 @@ class Table extends React.Component {
 		let x = this.state.tableMatrix[0].length;
 		let newMatrix = this.populateTable(y, x);
 		this.setState({ tableMatrix: newMatrix });
+		console.log(this.state.tableMatrix)
 	}
 
-	updateColorOfCell(x = 0, y = 0, color = this.props.getColor()) {
+	updateColorOfCell(x = 0, y = 0, color = this.props.color) {
 		let matrix = this.state.tableMatrix;
 		matrix[y][x] = color;
 		this.setState({ tableMatrix: matrix });
 	}
 
+	addColumnButton(){
+        let y = this.state.tableMatrix.length;
+		let x = this.state.tableMatrix[0].length + 1;
+		let newMatrix = this.populateTable(y, x);
+		this.setState({ tableMatrix: newMatrix });
+		console.log(this.state.tableMatrix)
+    }
+
+    deleteColumnButton(){
+        let y = this.state.tableMatrix.length;;
+		let x = this.state.tableMatrix[0].length - 1;
+		let newMatrix = this.populateTable(y, x);
+		this.setState({ tableMatrix: newMatrix });
+		console.log(this.state.tableMatrix)
+	}
+	
+	fillAll(){
+		let matrix = this.state.tableMatrix;
+		for(let i = 0; i < matrix.length; i++){
+			for(let j=0; j< matrix[1].length; j++){
+				matrix[i][j] = this.props.color;
+			}
+		}
+		this.setState({tableMatrix: matrix})
+	}
+	clear(){
+		let matrix = this.state.tableMatrix;
+		for(let i = 0; i < matrix.length; i++){
+			for(let j=0; j< matrix[1].length; j++){
+				matrix[i][j] = defaultColor;
+			}
+		}
+		this.setState({tableMatrix: matrix})
+
+	}
+
+	fillAllUncolored(){
+		// let matrix = this.state.tableMatrix;
+		// for(let i = 0; i < matrix.length; i++){
+		// 	if(matrix === defaultColor ||matrix === undefined){
+		// 		matrix[i][i] = this.props.color;
+		// 	}
+		// }
+		// this.setState({tableMatrix: matrix})
+	}
+
 	render() {
 		return (
 			<div>
-				<button onClick={this.handleAddButtonClick}>Add Row</button>
-				<button onClick={this.handleDeleteButtonClick}>Delete Row</button>
+				<div className="buttonRow">
+				<button className='buttons' onClick={this.handleAddButtonClick}>Add Row</button>
+				<button className='buttons' onClick={this.handleDeleteButtonClick}>Delete Row</button>
+				<button className='buttons' onClick={this.addColumnButton}>Add Column</button>
+                <button className='buttons' onClick={this.deleteColumnButton}>Delete Column</button>
+				<button className='buttons' onClick = {this.fillAll}>Fill All</button>
+				<button className='buttons' onClick = {this.clear}>Clear</button>
+				<button className='buttons' onClick = {this.fillAllUncolored}>Fill Uncolored</button>
+				</div>
+				
 
+				<div>
 				<table className="table">
 					<tbody>
 						{this.state.tableMatrix.map((row, yIndex) => {
@@ -88,6 +149,11 @@ class Table extends React.Component {
 						})}
 					</tbody>
 				</table>
+
+				</div>
+				
+
+				
 			</div>
 		);
 	}
