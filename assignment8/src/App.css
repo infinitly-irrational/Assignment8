@@ -1,5 +1,7 @@
 .App {
 	text-align: center;
+	background-color: rgb(29, 13, 13);
+	height: 200vh;
 }
 
 .App-logo {
@@ -36,16 +38,44 @@
 		transform: rotate(360deg);
 	}
 }
+table, td, tr{
+	border: 2px solid black;
+}
 
-.tableRows {
-	border: 2px solid black;
-	height: 50px;
-}
-.table {
-	width: 50%;
-	border: 2px solid black;
-}
+
+
+.buttons {
+	background-color: #4CAF50; /* Green */
+	border-radius: 10px;
+	border: none;
+	color: white;
+	padding: 16px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 2px 20px;
+	transition-duration: 0.4s;
+	cursor: pointer;
+  }
+  .buttons:hover{
+	background-color: #f44336;
+	color: white;
+
+  }
+
+
+
 td {
-	width: 10px;
-	height: 10px;
+	width: 50px;
+	height: 50px;
+	border: 10px solid #282c34;
+}
+
+.buttonRow{
+	background-color: rgb(141, 120, 0);
+}
+#colorPicker{
+	background-color: rgb(141, 120, 0);
+
 }

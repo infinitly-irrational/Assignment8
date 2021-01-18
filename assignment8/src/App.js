@@ -43,8 +43,9 @@ class App extends Component {
 							</option>
 						</select>
 					</form>
+					<br></br>
 				</div>
-				<Table id="table" getColor={this.getColor} dimensions={{ x: 2, y: 3 }} />
+				<Table id="table" color={this.state.backgroundColor} dimensions={{ x: 2, y: 3 }} />
 			</div>
 		);
 	}
